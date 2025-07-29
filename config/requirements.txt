@@ -2,8 +2,8 @@
 # Python Dependencies
 
 # Core Flask Framework
-Flask==3.1.1
-Werkzeug==3.0.1
+flask==3.1.1
+werkzeug==3.1.0
 
 # AI and Machine Learning
 ollama==0.1.7

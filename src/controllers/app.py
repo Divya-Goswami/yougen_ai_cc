@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify, Response
+from flask import Flask, request, render_template, jsonify, Response, send_from_directory
 import ollama
 import os
 import sys
@@ -232,7 +232,7 @@ BLOG_POSTS = {
         'title': 'How AI is Changing YouTube Content Creation',
         'date': 'March 21, 2025',
         'read_time': 5,
-        'image': '/static/blog-images/ai-youtube.jpg',
+        'image': '/assets/images/blog/ai-youtube.jpg',
         'content': '''
             <p>Artificial Intelligence is revolutionizing how creators approach YouTube content creation. From generating engaging titles to crafting compelling descriptions, AI tools are becoming indispensable for content creators looking to stay ahead in the competitive world of video content.</p>
 
@@ -269,13 +269,13 @@ BLOG_POSTS = {
                 'url': '/blog/viral-youtube-titles',
                 'title': '5 Tips for Viral YouTube Titles',
                 'excerpt': 'Learn the secrets to crafting irresistible YouTube titles that drive clicks and boost your channel\'s growth.',
-                'image': '/static/blog-images/viral-titles.jpg'
+                'image': '/assets/images/blog/viral-titles.jpg'
             },
             {
                 'url': '/blog/optimizing-thumbnails-ai',
                 'title': 'Optimizing Thumbnails with AI',
                 'excerpt': 'See how AI tools can help you design eye-catching thumbnails that increase your video views and engagement.',
-                'image': '/static/blog-images/thumbnails.jpg'
+                'image': '/assets/images/blog/thumbnails.jpg'
             }
         ]
     },
@@ -283,7 +283,7 @@ BLOG_POSTS = {
         'title': '5 Tips for Viral YouTube Titles',
         'date': 'March 19, 2025',
         'read_time': 4,
-        'image': '/static/blog-images/viral-titles.jpg',
+        'image': '/assets/images/blog/viral-titles.jpg',
         'content': '''
             <p>Creating viral YouTube titles is both an art and a science. In this guide, we'll explore five proven strategies that can help your videos get more clicks and views.</p>
 
@@ -322,13 +322,13 @@ BLOG_POSTS = {
                 'url': '/blog/ai-changing-youtube',
                 'title': 'How AI is Changing YouTube Content Creation',
                 'excerpt': 'Discover how artificial intelligence is revolutionizing the way creators generate ideas, titles, and thumbnails.',
-                'image': '/static/blog-images/ai-youtube.jpg'
+                'image': '/assets/images/blog/ai-youtube.jpg'
             },
             {
                 'url': '/blog/optimizing-thumbnails-ai',
                 'title': 'Optimizing Thumbnails with AI',
                 'excerpt': 'See how AI tools can help you design eye-catching thumbnails that increase your video views and engagement.',
-                'image': '/static/blog-images/thumbnails.jpg'
+                'image': '/assets/images/blog/thumbnails.jpg'
             }
         ]
     },
@@ -336,7 +336,7 @@ BLOG_POSTS = {
         'title': 'Optimizing Thumbnails with AI',
         'date': 'March 17, 2025',
         'read_time': 6,
-        'image': '/static/blog-images/thumbnails.jpg',
+        'image': '/assets/images/blog/thumbnails.jpg',
         'content': '''
             <p>Thumbnails are crucial for YouTube success. With AI tools, creating eye-catching thumbnails has become easier and more effective than ever. Here's your complete guide to optimizing thumbnails using AI.</p>
 
@@ -378,13 +378,13 @@ BLOG_POSTS = {
                 'url': '/blog/ai-changing-youtube',
                 'title': 'How AI is Changing YouTube Content Creation',
                 'excerpt': 'Discover how artificial intelligence is revolutionizing the way creators generate ideas, titles, and thumbnails.',
-                'image': '/static/blog-images/ai-youtube.jpg'
+                'image': '/assets/images/blog/ai-youtube.jpg'
             },
             {
                 'url': '/blog/viral-youtube-titles',
                 'title': '5 Tips for Viral YouTube Titles',
                 'excerpt': 'Learn the secrets to crafting irresistible YouTube titles that drive clicks and boost your channel\'s growth.',
-                'image': '/static/blog-images/viral-titles.jpg'
+                'image': '/assets/images/blog/viral-titles.jpg'
             }
         ]
     }
@@ -485,7 +485,8 @@ def blog():
 
 @app.route('/documentation')
 def documentation():
-    return app.send_static_file('DOCUMENTATION.html')
+    docs_path = os.path.join(os.getcwd(), 'docs')
+    return send_from_directory(docs_path, 'DOCUMENTATION.html')
 
 @app.errorhandler(404)
 def not_found(error):
