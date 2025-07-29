@@ -1,0 +1,781 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouGen AI | Viral YouTube Titles, Descriptions, Hashtags & Thumbnails</title>
+  <meta name="google-site-verification" content="pvKNWy7g9Z18i_fwxoHusEzrKG4sQPq_IN2Oe1cngOc" />
+  <meta name="description" content="YouGen AI is the leading AI-powered YouTube content generator. Instantly create viral YouTube titles, descriptions, hashtags, and thumbnail ideas to boost your channel growth and SEO.">
+  <meta name="keywords" content="YouGen AI, YouTube SEO, viral video ideas, YouTube automation, trending YouTube titles, AI content creator, YouTube description generator, YouTube hashtags, video marketing, YouTube growth, YouTube channel tools, YouTube AI, YouTube video generator, YouTube thumbnail ideas, YouTube content automation, YouTube video optimization, YouTube engagement, YouTube trending, YouTube AI tools, YouTube video marketing, YouTube channel growth, YouTube content strategy, YouTube video ideas, YouTube AI generator, YouTube video SaaS, YouTube content SaaS, YouTube AI platform, YouTube video success, YouTube audience growth, YouTube viral content, YouTube AI assistant, YouTube video script, YouTube video description, YouTube video hashtags, YouTube video titles, YouTube video thumbnail, YouTube video engagement, YouTube video reach, YouTube video boost, YouTube video ranking, YouTube video discoverability, YouTube video automation, YouTube video trends, YouTube video analytics, YouTube video performance, YouTube video creator, YouTube video influencer, YouTube video marketing tools, YouTube video SaaS platform">
+  <link rel="canonical" href="https://tubegenuis.online/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "YouGen AI",
+    "image": "https://tubegenuis.online/.jpg",
+    "description": "YouGen AI is the #1 AI-powered YouTube content generator. Instantly create viral YouTube titles, descriptions, hashtags, and thumbnail ideas. Boost your channel growth and SEO with YouGen AI.",
+    "brand": {
+      "@type": "Brand",
+      "name": "YouGen AI"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://tubegenuis.online/",
+      "priceCurrency": "USD",
+      "price": "29.00",
+      "availability": "https://schema.org/InStock",
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "US",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "USD"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "US"
+        }
+      }
+    }
+  }
+  </script>
+  <!-- Production-optimized Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='120' fill='%2300bcd4'/%3E%3Cpath fill='white' d='M176 160c-17.673 0-32 14.327-32 32v128c0 17.673 14.327 32 32 32h96c17.673 0 32-14.327 32-32v-30.5l54.328 36.22C365.3 331.42 384 320.63 384 304V208c0-16.63-18.7-27.42-33.672-21.72L296 222.5V192c0-17.673-14.327-32-32-32H176z'/%3E%3C/svg%3E">
+
+
+  
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .yougen-gradient { background: linear-gradient(135deg, #00bcd4 0%, #4caf50 100%); }
+    .yougen-blue { background: #00bcd4; }
+    .yougen-blue-hover:hover { background: #0097a7; }
+    .card-shadow { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    .input-focus:focus { box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1); }
+    .btn-yougen { background: linear-gradient(135deg, #00bcd4 0%, #4caf50 100%); }
+    .btn-yougen:hover { background: linear-gradient(135deg, #0097a7 0%, #388e3c 100%); }
+    
+    /* Network Status Styles */
+    .network-status {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .network-status.show {
+      transform: translateY(0);
+    }
+    
+    .network-status.offline {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+    
+    .network-status.online {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    
+    /* Loader Animation */
+    .loader {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .loader.show {
+      display: flex;
+    }
+    
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #ff0000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .bounce {
+      animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+      40%, 43% { transform: translate3d(0, -30px, 0); }
+      70% { transform: translate3d(0, -15px, 0); }
+      90% { transform: translate3d(0, -4px, 0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Network Status Bar -->
+  <div id="networkStatus" class="network-status">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between text-white">
+        <div class="flex items-center space-x-3">
+          <svg id="networkIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
+          </svg>
+          <span id="networkMessage" class="font-medium">Checking connection...</span>
+        </div>
+        <button id="reconnectBtn" onclick="checkConnection()" class="hidden bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center space-x-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          <span>Reconnect</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offline Overlay -->
+  <div id="offlineOverlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="bg-white rounded-3xl p-8 max-w-md mx-4 text-center shadow-2xl">
+      <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-800 mb-3">No Internet Connection</h3>
+      <p class="text-gray-600 mb-6 leading-relaxed">
+        Please check your internet connection and try again. The YouGen AI requires an internet connection to work properly.
+      </p>
+      <div class="space-y-3">
+        <button onclick="checkConnection()" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-red-600 hover:to-red-700 transition-all duration-200 flex items-center justify-center space-x-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          <span>Try Again</span>
+        </button>
+        <button onclick="window.location.reload()" class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-200">
+          Refresh Page
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Redesigned Sticky Header -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur shadow-md">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 via-teal-400 to-green-300 rounded-xl flex items-center justify-center shadow">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke-width="2" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 8l6 4-6 4V8z" />
+            </svg>
+        </div>
+        <span class="text-2xl font-extrabold bg-gradient-to-r from-cyan-600 via-teal-500 to-green-400 bg-clip-text text-transparent tracking-tight">YouGen AI</span>
+      </a>
+      <!-- Navigation Links -->
+      <ul class="hidden md:flex gap-8 items-center text-gray-700 font-semibold text-base">
+        <li><a href="/" class="hover:text-cyan-600 transition">Home</a></li>
+        <li><a href="#features" class="hover:text-cyan-600 transition">Features</a></li>
+        <li><a href="#blog" class="hover:text-cyan-600 transition">Blog</a></li>
+        <li><a href="#docs" class="hover:text-cyan-600 transition">Docs</a></li>
+        <li><a href="#contact" class="hover:text-cyan-600 transition">Contact</a></li>
+      </ul>
+      <!-- CTA Button -->
+      <a href="#" class="ml-4 px-6 py-2 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-green-500 shadow hover:from-cyan-600 hover:to-green-600 transition hidden md:inline-block">Try Free</a>
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden flex items-center px-3 py-2 border rounded text-cyan-600 border-cyan-200 hover:bg-cyan-50 focus:outline-none ml-2" aria-label="Open navigation menu">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+    </nav>
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu" class="md:hidden hidden px-4 pb-4">
+      <ul class="flex flex-col gap-2">
+        <li><a href="/" class="block px-4 py-2 rounded-lg font-semibold text-gray-700 hover:bg-cyan-50 transition">Home</a></li>
+        <li><a href="#features" class="block px-4 py-2 rounded-lg font-semibold text-gray-700 hover:bg-cyan-50 transition">Features</a></li>
+        <li><a href="#blog" class="block px-4 py-2 rounded-lg font-semibold text-gray-700 hover:bg-cyan-50 transition">Blog</a></li>
+        <li><a href="#docs" class="block px-4 py-2 rounded-lg font-semibold text-gray-700 hover:bg-cyan-50 transition">Docs</a></li>
+        <li><a href="#contact" class="block px-4 py-2 rounded-lg font-semibold text-gray-700 hover:bg-cyan-50 transition">Contact</a></li>
+        <li><a href="#" class="block px-4 py-2 rounded-lg font-bold text-white bg-gradient-to-r from-cyan-500 to-green-500 shadow hover:from-cyan-600 hover:to-green-600 transition">Try Free</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <!-- Loader Overlay -->
+  <div id="loader" class="loader">
+    <div class="text-center max-w-md mx-auto px-4">
+      <div class="spinner mb-6 mx-auto"></div>
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold text-white mb-2">Generating Your Content</h3>
+        <p class="text-white/80 text-lg leading-relaxed">
+          Our AI is crafting the perfect YouTube title, description, and hashtags for your video...
+        </p>
+        <div class="flex justify-center space-x-2 mt-6">
+          <div class="w-3 h-3 bg-white/60 rounded-full pulse" style="animation-delay: 0s;"></div>
+          <div class="w-3 h-3 bg-white/60 rounded-full pulse" style="animation-delay: 0.2s;"></div>
+          <div class="w-3 h-3 bg-white/60 rounded-full pulse" style="animation-delay: 0.4s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex justify-center mb-4">
+      <span class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 via-cyan-500 to-green-500 text-white rounded-full px-5 py-2 shadow-lg animate-fade-in">
+        <svg class="w-5 h-5 animate-spin-slow" fill="currentColor" viewBox="0 0 24 24">
+          <rect width="24" height="24" rx="6" fill="#FF0000"/>
+          <polygon points="10,8 16,12 10,16" fill="white"/>
+        </svg>
+        <span class="font-semibold tracking-wide typewriter">Crafting YouTube Brilliance...</span>
+      </span>
+    </div>
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-gray-800 mb-4 tracking-tight">Create YouTube Content with YouGen AI</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        Generate compelling titles, descriptions, and hashtags that drive engagement and boost your YouTube success
+      </p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="bg-white rounded-3xl card-shadow p-8 border border-gray-100">
+      <!-- Error Message -->
+      {% if error %}
+      <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+        <div class="flex items-center space-x-3">
+          <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p class="text-red-700 font-medium">{{ error }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      <form id="generateForm" method="POST" class="space-y-8">
+        <!-- Topic Input Section -->
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+            🎯 Video Topic
+          </label>
+          <div class="relative">
+            <input 
+              name="topic" 
+              required 
+              placeholder="What's your video about? (e.g., 'How to build a successful startup')" 
+              class="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-2xl input-focus focus:border-red-500 focus:outline-none transition-all duration-200 bg-white"
+              value="{{ request.form.get('topic', '') }}"
+            />
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tone Selection Section -->
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+            🎭 Content Tone
+          </label>
+          <select name="tone" class="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-2xl input-focus focus:border-red-500 focus:outline-none transition-all duration-200 bg-white appearance-none cursor-pointer">
+            <option value="">Select the tone that matches your content</option>
+            <option value="Clickbait" {% if request.form.get('tone') == 'Clickbait' %}selected{% endif %}>🎪 Clickbait - Attention-grabbing & sensational</option>
+            <option value="Educational" {% if request.form.get('tone') == 'Educational' %}selected{% endif %}>📚 Educational - Informative & learning-focused</option>
+            <option value="Emotional" {% if request.form.get('tone') == 'Emotional' %}selected{% endif %}>💝 Emotional - Heartfelt & inspiring</option>
+            <option value="Funny" {% if request.form.get('tone') == 'Funny' %}selected{% endif %}>😂 Funny - Humorous & entertaining</option>
+            <option value="Shocking" {% if request.form.get('tone') == 'Shocking' %}selected{% endif %}>😱 Shocking - Surprising & unexpected</option>
+          </select>
+        </div>
+
+        <!-- Audience Selection Section -->
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+            👥 Target Audience
+          </label>
+          <select name="audience" class="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-2xl input-focus focus:border-red-500 focus:outline-none transition-all duration-200 bg-white appearance-none cursor-pointer">
+            <option value="">Who is your target audience?</option>
+            <option value="General" {% if request.form.get('audience') == 'General' %}selected{% endif %}>🌍 General - Broad appeal to everyone</option>
+            <option value="Teens" {% if request.form.get('audience') == 'Teens' %}selected{% endif %}>👨‍🎓 Teens - Young audience (13-19)</option>
+            <option value="Gamers" {% if request.form.get('audience') == 'Gamers' %}selected{% endif %}>🎮 Gamers - Gaming community</option>
+            <option value="Entrepreneurs" {% if request.form.get('audience') == 'Entrepreneurs' %}selected{% endif %}>💼 Entrepreneurs - Business & startup focused</option>
+            <option value="Parents" {% if request.form.get('audience') == 'Parents' %}selected{% endif %}>👨‍👩‍👧‍👦 Parents - Family & parenting content</option>
+      </select>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="pt-4">
+          <button type="submit" id="submitBtn" class="w-full btn-yougen text-white py-4 px-8 rounded-2xl font-semibold text-lg transition-all duration-200 transform hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] flex items-center justify-center space-x-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <span id="btnText">Generate YouTube Content</span>
+          </button>
+        </div>
+    </form>
+
+      <!-- Results Section -->
+    {% if output %}
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <!-- Header with Success Animation -->
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-full mb-6 animate-pulse">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h2 class="text-4xl font-bold text-gray-800 mb-3">Content Generated Successfully!</h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">Your AI-powered YouTube content is ready. Click any copy button to copy content instantly!</p>
+        </div>
+
+        {% if sections %}
+          {% set current_section = 'titles' %}
+          {% set current_content = sections.titles %}
+          {% if current_content %}
+            {% include 'section_template.html' %}
+          {% endif %}
+
+          {% set current_section = 'description' %}
+          {% set current_content = sections.description %}
+          {% if current_content %}
+            {% include 'section_template.html' %}
+          {% endif %}
+
+          {% set current_section = 'hashtags' %}
+          {% set current_content = sections.hashtags %}
+          {% if current_content %}
+            {% include 'section_template.html' %}
+          {% endif %}
+
+          {% set current_section = 'thumbnails' %}
+          {% set current_content = sections.thumbnails %}
+          {% if current_content %}
+            {% include 'section_template.html' %}
+          {% endif %}
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8">
+      <p class="text-gray-500 text-sm">
+        Powered by YouGen AI • Create engaging YouTube content in seconds
+      </p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+<section class="bg-gradient-to-br from-cyan-50 via-white to-green-50 py-20">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6">Create Viral YouTube Content Instantly with <span class="bg-gradient-to-r from-cyan-500 to-green-500 bg-clip-text text-transparent">YouGen AI</span></h1>
+    <p class="text-xl text-gray-700 mb-8">Generate high-converting titles, descriptions, hashtags, and thumbnails for your YouTube channel in seconds. No technical skills required—just enter your topic and let AI do the rest!</p>
+    <a href="#" class="inline-block px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-green-500 shadow hover:from-cyan-600 hover:to-green-600 transition text-lg">Try YouGen AI Free</a>
+    <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-8">
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-bold text-cyan-600">50+</span>
+        <span class="text-gray-600">Creators Served</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-bold text-green-600">40%</span>
+        <span class="text-gray-600">Avg. View Increase</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-bold text-teal-600">95%</span>
+        <span class="text-gray-600">User Satisfaction</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section id="features" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-8 text-center">Why Choose YouGen AI?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Instant Results</h3>
+          <p class="text-gray-600">Get AI-generated YouTube content in seconds. No more writer’s block or endless brainstorming.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">SEO Optimized</h3>
+          <p class="text-gray-600">Boost your channel’s reach with content designed to rank higher and attract more viewers.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Easy to Use</h3>
+          <p class="text-gray-600">A simple, intuitive interface—just enter your topic and get results. Perfect for beginners and pros alike.</p>
+        </div>
+      </div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+          <h4 class="text-xl font-bold text-cyan-700 mb-2">Customizable Tones & Audiences</h4>
+          <p class="text-gray-600">Choose from clickbait, educational, emotional, funny, and more. Target your ideal audience for maximum impact.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+          <h4 class="text-xl font-bold text-teal-700 mb-2">Thumbnails & Hashtags</h4>
+          <p class="text-gray-600">Get AI-generated thumbnail ideas and trending hashtags to make your videos stand out and get discovered.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modern Blog Section -->
+  <section id="blog" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-8 text-center">Latest from the Blog</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+          <img src="/assets/images/blog/ai-youtube.jpg" alt="Blog Post 1" class="h-48 w-full object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">How AI is Changing YouTube Content Creation</h3>
+            <p class="text-gray-600 mb-4 flex-1">Discover how artificial intelligence is revolutionizing the way creators generate ideas, titles, and thumbnails for YouTube videos. Learn practical tips to leverage AI for your own channel.</p>
+            <a href="/blog/ai-changing-youtube" class="inline-block mt-auto px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 transition">Read More</a>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+          <img src="/assets/images/blog/viral-titles.jpg" alt="Blog Post 2" class="h-48 w-full object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">5 Tips for Viral YouTube Titles</h3>
+            <p class="text-gray-600 mb-4 flex-1">Learn the secrets to crafting irresistible YouTube titles that drive clicks and boost your channel's growth. Real-world examples and actionable advice included.</p>
+            <a href="/blog/viral-youtube-titles" class="inline-block mt-auto px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 transition">Read More</a>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+          <img src="/assets/images/blog/thumbnails.jpg" alt="Blog Post 3" class="h-48 w-full object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Optimizing Thumbnails with AI</h3>
+            <p class="text-gray-600 mb-4 flex-1">See how AI tools can help you design eye-catching thumbnails that increase your video views and engagement. Step-by-step guide for beginners.</p>
+            <a href="/blog/optimizing-thumbnails-ai" class="inline-block mt-auto px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 transition">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-8 text-center">Documentation</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Getting Started</h3>
+          <p class="text-gray-600">Sign up, create your first project, and start generating content in minutes. See our <a href="/documentation" class="text-cyan-600 underline">full guide</a> for details.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">API Integration</h3>
+          <p class="text-gray-600">Integrate YouGen AI into your workflow with our simple API. <a href="/documentation#integration" class="text-cyan-600 underline">See API docs</a>.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Advanced Features</h3>
+          <p class="text-gray-600">Explore custom tones, audience targeting, and bulk content generation. <a href="/documentation#features" class="text-cyan-600 underline">Learn more</a>.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Troubleshooting</h3>
+          <p class="text-gray-600">Find solutions to common issues and get help fast. <a href="/documentation#troubleshooting" class="text-cyan-600 underline">Troubleshooting guide</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-8 text-center">Contact Us</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Have a Question?</h3>
+          <p class="text-gray-600">Email us at <a href="mailto:divya.gusai7893@gmail.com" class="text-cyan-600 underline">divya.gusai7893@gmail.com</a>.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Stay Updated</h3>
+          <p class="text-gray-600">Subscribe to our newsletter for the latest updates and tips. <a href="https://www.producthunt.com/p/general/yougen-ai-youtube-content-generator" class="text-cyan-600 underline">Join now</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Network connectivity management (reliable version)
+    let isOnline = true; // Assume online until health check says otherwise
+    let connectionCheckInterval;
+    let wasOffline = false;
+
+    // Initialize network status
+    function initNetworkStatus() {
+      checkConnection(); // Initial check
+      connectionCheckInterval = setInterval(checkConnection, 30000); // Check every 30 seconds
+    }
+
+    // Update network status display
+    function updateNetworkStatus(isInitial = false) {
+      const networkStatus = document.getElementById('networkStatus');
+      const networkIcon = document.getElementById('networkIcon');
+      const networkMessage = document.getElementById('networkMessage');
+      const reconnectBtn = document.getElementById('reconnectBtn');
+      if (isOnline) {
+        if (!isInitial && wasOffline) {
+          networkStatus.className = 'network-status online show';
+          networkIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+          networkMessage.textContent = 'Connected to internet';
+          reconnectBtn.classList.add('hidden');
+          setTimeout(() => {
+            networkStatus.classList.remove('show');
+          }, 3000);
+          wasOffline = false;
+        } else {
+          networkStatus.className = 'network-status';
+        }
+      } else {
+        networkStatus.className = 'network-status offline show';
+        networkIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>';
+        networkMessage.textContent = 'No internet connection';
+        reconnectBtn.classList.remove('hidden');
+      }
+    }
+
+    // Check connection by making a request to /health
+    async function checkConnection() {
+      const networkStatus = document.getElementById('networkStatus');
+      const networkMessage = document.getElementById('networkMessage');
+      // If browser says offline, show dialog immediately
+      if (typeof navigator.onLine !== 'undefined' && !navigator.onLine) {
+        isOnline = false;
+        wasOffline = true;
+        updateNetworkStatus(false);
+        showOfflineOverlay();
+        return;
+      }
+      try {
+        // Add a random query to prevent caching
+        const response = await fetch('/health?rand=' + Math.random(), { cache: 'no-store' });
+        if (response.ok) {
+          isOnline = true;
+          updateNetworkStatus(false);
+          hideOfflineOverlay();
+        } else {
+          throw new Error('Health check failed');
+        }
+      } catch (error) {
+        isOnline = false;
+        wasOffline = true;
+        updateNetworkStatus(false);
+        showOfflineOverlay();
+      }
+    }
+
+    // Show offline overlay
+    function showOfflineOverlay() {
+      const overlay = document.getElementById('offlineOverlay');
+      overlay.classList.remove('hidden');
+    }
+
+    // Hide offline overlay
+    function hideOfflineOverlay() {
+      const overlay = document.getElementById('offlineOverlay');
+      overlay.classList.add('hidden');
+    }
+
+    // Initialize network status when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initNetworkStatus();
+    });
+
+    document.getElementById('generateForm').addEventListener('submit', function(e) {
+      // Check connection before submitting
+      if (!isOnline) {
+        e.preventDefault();
+        showOfflineOverlay();
+        return;
+      }
+      
+      // Show loader
+      document.getElementById('loader').classList.add('show');
+      
+      // Disable submit button and change text
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      submitBtn.disabled = true;
+      btnText.textContent = 'Generating...';
+      
+      // Add loading state to button
+      submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+      
+      // The form will submit normally, and the page will reload with results
+      // The loader will disappear when the new page loads
+    });
+
+    // Copy individual sentence content
+    function copySentence(element) {
+      const text = element.querySelector('p, span').textContent.trim();
+      
+      navigator.clipboard.writeText(text).then(function() {
+        // Add success animation to the element
+        element.style.transform = 'scale(1.02)';
+        element.style.backgroundColor = 'rgba(34, 197, 94, 0.1)';
+        element.style.borderColor = '#22c55e';
+        
+        // Show copy icon
+        const copyIcon = element.querySelector('svg');
+        if (copyIcon) {
+          copyIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+          copyIcon.classList.add('text-green-500');
+        }
+        
+        // Reset after animation
+        setTimeout(() => {
+          element.style.transform = 'scale(1)';
+          element.style.backgroundColor = '';
+          element.style.borderColor = '';
+          if (copyIcon) {
+            copyIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>';
+            copyIcon.classList.remove('text-green-500');
+          }
+        }, 1000);
+        
+        showNotification('Content copied to clipboard!', 'success');
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+        showNotification('Failed to copy content', 'error');
+      });
+    }
+
+    // Show notification with improved styling
+    function showNotification(message, type) {
+      // Remove existing notification
+      const existingNotification = document.querySelector('.notification');
+      if (existingNotification) {
+        existingNotification.remove();
+      }
+      
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `notification fixed top-6 right-6 z-50 p-6 rounded-2xl shadow-2xl transition-all duration-500 transform translate-x-full max-w-sm ${
+        type === 'success' 
+          ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white' 
+          : 'bg-gradient-to-r from-red-500 to-pink-500 text-white'
+      }`;
+      
+      notification.innerHTML = `
+        <div class="flex items-center space-x-3">
+          <div class="flex-shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${
+                type === 'success' 
+                  ? 'M5 13l4 4L19 7' 
+                  : 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+              }"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-lg">${type === 'success' ? 'Success!' : 'Error!'}</p>
+            <p class="text-sm opacity-90">${message}</p>
+          </div>
+          <button onclick="this.parentElement.parentElement.remove()" class="flex-shrink-0 ml-2 opacity-70 hover:opacity-100 transition-opacity">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Animate in
+      setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+      }, 100);
+      
+      // Remove after 4 seconds
+      setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => {
+          notification.remove();
+        }, 500);
+      }, 4000);
+    }
+
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (btn && menu) {
+        btn.addEventListener('click', function() {
+          menu.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

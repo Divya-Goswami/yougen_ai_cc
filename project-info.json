@@ -1,0 +1,140 @@
+{
+  "name": "yougen-ai-youtube-content-generator",
+  "version": "1.0.0",
+  "description": "AI-powered YouTube content generator for titles, descriptions, hashtags, and thumbnail ideas",
+  "author": "YouGen AI Team",
+  "email": "support@yougenai.com",
+  "license": "MIT",
+  "category": "Web Applications",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "youtube",
+    "ai",
+    "content-generation",
+    "flask",
+    "ollama",
+    "titles",
+    "descriptions",
+    "hashtags",
+    "thumbnails",
+    "web-app",
+    "python",
+    "responsive"
+  ],
+  "features": [
+    "AI-powered title generation",
+    "Smart description writer",
+    "Trending hashtag generator",
+    "Thumbnail idea creator",
+    "Tone customization",
+    "Audience targeting",
+    "Responsive design",
+    "Real-time processing",
+    "Easy deployment",
+    "Production ready"
+  ],
+  "requirements": {
+    "python": ">=3.8",
+    "ram": "2GB minimum (4GB recommended)",
+    "storage": "500MB free space",
+    "internet": "Required for AI model access"
+  },
+  "dependencies": {
+    "flask": "3.1.1",
+    "ollama": "0.1.7",
+    "python-dotenv": "1.0.0",
+    "gunicorn": "21.2.0"
+  },
+  "deployment": {
+    "platforms": [
+      "Heroku",
+      "Railway",
+      "Render",
+      "DigitalOcean",
+      "AWS",
+      "Google Cloud"
+    ],
+    "requirements": [
+      "Python 3.8+",
+      "Ollama AI server",
+      "Environment variables"
+    ]
+  },
+  "file_structure": {
+    "main.py": "Application entry point",
+    "src/": "Source code directory",
+    "src/controllers/": "Flask routes and logic",
+    "src/views/": "HTML templates",
+    "src/utils/": "Utility functions",
+    "src/models/": "Data models",
+    "assets/": "Static assets",
+    "assets/css/": "Stylesheets",
+    "assets/js/": "JavaScript files",
+    "assets/images/": "Images and media",
+    "assets/fonts/": "Custom fonts",
+    "config/": "Configuration files",
+    "docs/": "Documentation",
+    "README.md": "Main documentation"
+  },
+  "installation_steps": [
+    "Extract files to desired location",
+    "Create Python virtual environment",
+    "Install dependencies: pip install -r config/requirements.txt",
+    "Install Ollama and download AI model",
+    "Configure environment variables",
+    "Run application: python main.py"
+  ],
+  "customization_areas": [
+    "CSS styling in assets/css/",
+    "AI prompts in src/controllers/app.py",
+    "HTML templates in src/views/",
+    "Configuration in config/config.py",
+    "JavaScript functionality in assets/js/"
+  ],
+  "support": {
+    "documentation": "docs/CODECANYON_DOCUMENTATION.md",
+    "installation_guide": "docs/INSTALLATION.md",
+    "demo_instructions": "docs/DEMO.md",
+    "support_info": "docs/SUPPORT.md",
+    "email": "support@yougenai.com"
+  },
+  "compatibility": {
+    "browsers": [
+      "Chrome 90+",
+      "Firefox 88+",
+      "Safari 14+",
+      "Edge 90+"
+    ],
+    "operating_systems": [
+      "Windows 10+",
+      "macOS 10.15+",
+      "Ubuntu 18.04+",
+      "CentOS 7+"
+    ]
+  },
+  "performance": {
+    "response_time": "< 5 seconds for content generation",
+    "concurrent_users": "100+ simultaneous users",
+    "memory_usage": "~200MB RAM",
+    "cpu_usage": "Low to moderate"
+  },
+  "security": {
+    "features": [
+      "CSRF protection",
+      "Input validation",
+      "Secure headers",
+      "Environment variable protection"
+    ],
+    "recommendations": [
+      "Use HTTPS in production",
+      "Set strong SECRET_KEY",
+      "Regular security updates",
+      "Monitor logs"
+    ]
+  },
+  "updates": {
+    "version_history": "docs/CHANGELOG.md",
+    "update_frequency": "Monthly",
+    "backward_compatibility": "Yes"
+  }
+} 

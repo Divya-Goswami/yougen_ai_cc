@@ -1,0 +1,35 @@
+Asset Attribution for "AI YouTube Content Generator"
+
+All assets used in this product are either:
+- Created by the author (myself), or
+- Properly licensed for commercial use and redistribution.
+
+1. Icons:
+   - Source: [Heroicons](https://heroicons.com/)
+   - License: MIT License
+   - Usage: Used in UI elements
+
+2. Fonts:
+   - Source: [Google Fonts](https://fonts.google.com/)
+   - Font Used: Inter, Roboto
+   - License: Open Font License (OFL)
+
+3. Images (if any sample images or placeholders used):
+   - Source: [Unsplash](https://unsplash.com) / [Pexels](https://pexels.com)
+   - License: Free for commercial use, no attribution required
+
+4. AI Model:
+   - Model: Gemma:2b via Ollama
+   - License: Apache 2.0 License
+   - Used for content generation within the app
+
+5. UI/UX Design:
+   - Tool: TailwindCSS
+   - License: MIT License
+   - Usage: For front-end layout and styling
+
+No unlicensed or copyrighted third-party content has been used.
+This product is fully compliant with Envato's licensing requirements.
+
+Author:
+Divya Gusai

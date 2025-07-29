@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouGen AI Documentation & Quick Start Guide</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; color: #222; margin: 0; padding: 0; }
+    .container { max-width: 900px; margin: 40px auto; background: #fff; padding: 40px 32px 40px 32px; border-radius: 18px; box-shadow: 0 8px 32px rgba(44,62,80,0.10); }
+    h1, h2, h3 { color: #d32f2f; }
+    h1 { font-size: 2.3rem; margin-bottom: 0.5em; }
+    h2 { font-size: 1.5rem; margin-top: 2em; margin-bottom: 0.7em; }
+    h3 { font-size: 1.15rem; margin-top: 1.5em; margin-bottom: 0.5em; }
+    p, li { font-size: 1.08rem; line-height: 1.7; }
+    ul, ol { margin-bottom: 1.5em; }
+    code, pre { background: #f3f3f3; color: #b71c1c; padding: 2px 6px; border-radius: 4px; font-size: 1em; }
+    .toc { background: #fff3cd; border-radius: 8px; padding: 18px 24px; margin-bottom: 2em; }
+    .toc ul { margin: 0; padding-left: 1.2em; }
+    .badge { display: inline-block; background: #ff5252; color: #fff; border-radius: 6px; padding: 2px 10px; font-size: 0.95em; margin-left: 8px; }
+    .section { margin-bottom: 2.5em; }
+    .tip { background: #e3fcec; color: #256029; border-left: 4px solid #2ecc71; padding: 10px 18px; border-radius: 6px; margin: 1em 0; }
+    .warn { background: #fff3cd; color: #856404; border-left: 4px solid #ffb300; padding: 10px 18px; border-radius: 6px; margin: 1em 0; }
+    .footer { margin-top: 3em; color: #888; font-size: 0.98em; text-align: center; }
+    a { color: #1976d2; text-decoration: underline; }
+    @media (max-width: 600px) { .container { padding: 12px 2vw 18px 2vw; } h1 { font-size: 1.5rem; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>YouGen AI <span class="badge"> YouTube Content Generator</span></h1>
+    <p><strong>Version:</strong> 1.0 &nbsp; | &nbsp; <strong>License:</strong> MIT &nbsp; | &nbsp; <strong>Author:</strong> Divya Gusai</p>
+    <p>Welcome to YouGen AI! This guide will help you install, configure, and use the AI YouTube Content Generator, even if you have limited technical experience.</p>
+
+    <div class="toc">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#quickstart">Quick Start</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#integration">Integration</a></li>
+        <li><a href="#configuration">Configuration</a></li>
+        <li><a href="#deployment">Deployment</a></li>
+        <li><a href="#troubleshooting">Troubleshooting & FAQ</a></li>
+        <li><a href="#support">Support & Contact</a></li>
+        <li><a href="#changelog">Changelog & Credits</a></li>
+      </ul>
+    </div>
+
+    <div class="section" id="quickstart">
+      <h2>Quick Start Guide</h2>
+      <ol>
+        <li>Unzip the package and open the folder.</li>
+        <li>Run <code>setup.sh</code> (macOS/Linux) or <code>setup.bat</code> (Windows) to install everything automatically.</li>
+        <li>Start the app: <code>python app.py</code></li>
+        <li>Open <a href="http://localhost:5000" target="_blank">http://localhost:5000</a> in your browser.</li>
+        <li>Enter your YouTube topic, select tone and audience, and click Generate.</li>
+        <li>Copy the generated titles, descriptions, hashtags, and thumbnails for your YouTube videos.</li>
+      </ol>
+      <div class="tip">No coding required! Everything works out of the box.</div>
+      <div style="margin:2em 0; text-align:center;">
+        <div style="font-size:1em; color:#555; margin-bottom:2em;">Step 1: Enter your video topic, select tone and audience, then click Generate YouTube Content.</div>
+        <img src="/static/screenshots/screenshot_1.png" alt="YouGen AI Generating Content" style="max-width:100%; border-radius:12px; box-shadow:0 2px 12px #eee; margin-bottom:1em;">
+        <div style="font-size:1em; color:#555; margin-bottom:2em;">Step 2: The AI generates your content in seconds.</div>
+        <img src="/static/screenshots/screenshot_2.png" alt="YouGen AI Content Generated Successfully" style="max-width:58%; border-radius:12px; box-shadow:0 2px 12px #eee; margin-bottom:1em;">
+        <div style="font-size:1em; color:#555; margin-bottom:2em;">Step 3: Instantly copy your AI-generated titles, descriptions, hashtags, and thumbnail ideas.</div>
+        <img src="/static/screenshots/screenshot_3.png" alt="YouGen AI Hashtags and Thumbnails" style="max-width:100%; border-radius:12px; box-shadow:0 2px 12px #eee;">
+        <!-- <div style="font-size:1em; color:#555;">Step 4: Use the hashtags and thumbnail ideas to optimize your YouTube video.</div> -->
+        <img src="/static/screenshots/screenshot_4.png" alt="YouGen AI Home - Enter Topic and Options" style="max-width:100%; border-radius:12px; box-shadow:0 2px 12px #eee; margin-bottom:1em;">
+      </div>
+    </div>
+
+    <div class="section" id="features">
+      <h2>Features</h2>
+      <ul>
+        <li>Generate viral YouTube <strong>titles</strong>, <strong>descriptions</strong>, <strong>hashtags</strong>, and <strong>thumbnail ideas</strong> instantly</li>
+        <li>Powered by <strong>Ollama AI</strong> (local LLM) for privacy and speed</li>
+        <li>Modern, responsive web interface (mobile & desktop)</li>
+        <li>SEO-optimized output for YouTube growth</li>
+        <li>Customizable return policy for digital sales compliance</li>
+        <li>Easy deployment to <strong>Render</strong>, <strong>Heroku</strong>, <strong>Railway</strong>, or your own server</li>
+        <li>Google site verification & dynamic sitemap for SEO</li>
+        <li>Professional blog and support sections included</li>
+      </ul>
+    </div>
+
+    <div class="section" id="requirements">
+      <h2>Requirements</h2>
+      <ul>
+        <li>Python 3.8+</li>
+        <li>pip (Python package manager)</li>
+        <li>Ollama (for local AI model inference) <a href="https://ollama.com/" target="_blank">[Download]</a></li>
+        <li>Git (for deployment, optional)</li>
+        <li>Cloud account (Render, Heroku, or Railway) <em>(optional for cloud deployment)</em></li>
+      </ul>
+    </div>
+
+    <div class="section" id="installation">
+      <h2>Installation</h2>
+      <h3>Local Installation (macOS/Linux/Windows)</h3>
+      <ol>
+        <li>Download or clone the project:<br><code>git clone https://github.com/Divya-Goswami/ai-youtube-generator.git</code></li>
+        <li>Navigate to the project folder:<br><code>cd ai-youtube-generator</code></li>
+        <li>Run the setup script:<br><code>./setup.sh</code> (macOS/Linux) <br>or<br> <code>setup.bat</code> (Windows)</li>
+        <li>Start Ollama and ensure the required model is available (e.g., <code>ollama run gemma:2b</code>)</li>
+        <li>Run the app:<br><code>python app.py</code></li>
+        <li>Open <a href="http://localhost:5000" target="_blank">http://localhost:5000</a> in your browser</li>
+      </ol>
+      <div class="tip">For detailed installation, see <code>INSTALLATION.md</code> in your download.</div>
+    </div>
+
+    <div class="section" id="integration">
+      <h2>Integration with Existing Projects</h2>
+      <p>You can integrate YouGen AI into your existing Flask or Python web app by importing the main logic from <code>app.py</code> or by using the API endpoints (if you expose them). For advanced integration, see the code comments and <code>README.md</code>.</p>
+      <ol>
+        <li>Copy the relevant functions or routes from <code>app.py</code> into your project.</li>
+        <li>Ensure all dependencies in <code>requirements.txt</code> are installed.</li>
+        <li>Optionally, run YouGen AI as a standalone service and interact via HTTP requests.</li>
+      </ol>
+      <h3>How to Use YouGen AI in Your Project</h3>
+      <ol>
+        <li>Follow the Quick Start steps above to get YouGen AI running locally.</li>
+        <li>To use the AI content generator in your own app, send a POST request to <code>/</code> with <code>topic</code>, <code>tone</code>, and <code>audience</code> fields.</li>
+        <li>Example using Python <code>requests</code>:</li>
+      </ol>
+      <pre>
+import requests
+
+data = {
+    'topic': 'How to grow on YouTube',
+    'tone': 'Educational',
+    'audience': 'General'
+}
+response = requests.post('http://localhost:5000/', data=data)
+print(response.text)
+</pre>
+      <p>You can also copy the generated content from the web interface and use it in your YouTube uploads.</p>
+      <div class="warn">If you need help with integration, contact support (see below).</div>
+    </div>
+
+    <div class="section" id="configuration">
+      <h2>Configuration</h2>
+      <h3>Configuration Options</h3>
+      <table border="1" cellpadding="6" style="border-collapse:collapse;">
+        <tr><th>Variable</th><th>Description</th><th>Example</th></tr>
+        <tr><td>SECRET_KEY</td><td>Flask session secret</td><td>your-secret-key</td></tr>
+        <tr><td>FLASK_DEBUG</td><td>Enable debug mode</td><td>True/False</td></tr>
+        <tr><td>RETURN_POLICY_TYPE</td><td>Return policy for digital sales</td><td>money_back_30 / money_back_7 / no_returns</td></tr>
+      </table>
+      <h3>Return Policy</h3>
+      <p>Configure your return policy for digital sales compliance and Google Search Console:</p>
+      <ol>
+        <li>Open <code>config.py</code> and select your preferred return policy (30-day, 7-day, or no returns).</li>
+        <li>Or, set the environment variable <code>RETURN_POLICY_TYPE</code> (recommended for cloud):<br>
+          <code>RETURN_POLICY_TYPE=money_back_30</code>
+        </li>
+      </ol>
+      <h3>Other Settings</h3>
+      <ul>
+        <li><strong>API keys:</strong> Not required (uses local Ollama model)</li>
+        <li><strong>SEO:</strong> Edit <code>index.html</code> meta tags for your brand</li>
+        <li><strong>Blog/Support:</strong> Edit <code>app.py</code> or <code>templates/</code> as needed</li>
+      </ul>
+    </div>
+
+    <div class="section" id="licensing">
+      <h2>Licensing</h2>
+      <p>This product is licensed under the MIT License. You are free to use, modify, and distribute it in personal or commercial projects. See LICENSE.txt for details.</p>
+    </div>
+
+    <div class="section" id="exportpdf">
+      <h2>Exporting Documentation to PDF</h2>
+      <p>To export this documentation as a PDF, open <code>DOCUMENTATION.html</code> in your browser and use the Print dialog (Ctrl+P or Cmd+P), then select “Save as PDF”.</p>
+    </div>
+
+    <div class="section" id="screenshotsfolder">
+      <h2>Screenshots Folder</h2>
+      <p>Place your screenshots in a folder named <code>screenshots</code> in the same directory as <code>DOCUMENTATION.html</code>. Use these filenames:</p>
+      <ul>
+        <li><code>screenshot_1.png</code></li>
+        <li><code>screenshot_2.png</code></li>
+        <li><code>screenshot_3.png</code></li>
+        <li><code>screenshot_4.png</code></li>
+      </ul>
+      <p>Open <code>DOCUMENTATION.html</code> in your browser to verify the images display correctly.</p>
+    </div>
+
+    <div class="section" id="deployment">
+      <h2>Deployment</h2>
+      <h3>Deploy to Render (Recommended)</h3>
+      <ol>
+        <li>Push your code to GitHub</li>
+        <li>Connect your repo to <a href="https://render.com/" target="_blank">Render</a></li>
+        <li>Set environment variables (see <code>RETURN_POLICY_CONFIG.md</code>)</li>
+        <li>Click <strong>Deploy</strong></li>
+        <li>Set up a custom domain if desired</li>
+      </ol>
+      <h3>Other Platforms</h3>
+      <ul>
+        <li><strong>Heroku:</strong> Use <code>Procfile</code> and <code>heroku config:set</code></li>
+        <li><strong>Railway:</strong> Use project variables and deploy from GitHub</li>
+        <li><strong>Manual:</strong> Run <code>python app.py</code> on your server</li>
+      </ul>
+    </div>
+
+    <div class="section" id="troubleshooting">
+      <h2>Troubleshooting & FAQ</h2>
+      <ul>
+        <li><strong>App won’t start?</strong> Check Python version and dependencies (<code>pip install -r requirements.txt</code>).</li>
+        <li><strong>Ollama not found?</strong> Download and install from <a href="https://ollama.com/" target="_blank">Ollama.com</a>.</li>
+        <li><strong>Google Search Console errors?</strong> Make sure your return policy and sitemap are configured (see above).</li>
+        <li><strong>Need to reset?</strong> Delete <code>venv/</code> and re-run <code>setup.sh</code> or <code>setup.bat</code>.</li>
+        <li><strong>Still stuck?</strong> Contact support below.</li>
+      </ul>
+    </div>
+
+    <div class="section" id="support">
+      <h2>Support & Contact</h2>
+      <p>For help, feature requests, or bug reports, contact:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:divya.gusai7893@gmail.com">divya.gusai7893@gmail.com</a></li>
+        <li><strong>GitHub Issues:</strong> <a href="https://github.com/Divya-Goswami/ai-youtube-generator/issues" target="_blank">Open an Issue</a></li>
+      </ul>
+    </div>
+
+    <div class="section" id="changelog">
+      <h2>Changelog & Credits</h2>
+      <ul>
+        <li><strong>v1.0</strong> – Initial release: AI YouTube content generator, blog, SEO, return policy config, Render/Heroku/Cloud support</li>
+      </ul>
+      <p>MIT License. Powered by <a href="https://ollama.com/" target="_blank">Ollama</a> and Flask. Design inspired by YouTube and modern SaaS best practices.</p>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 YouGen AI by Divya Gusai. All rights reserved.
+    </div>
+  </div>
+</body>
+</html> 
