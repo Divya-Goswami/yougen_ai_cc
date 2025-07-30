@@ -151,8 +151,8 @@ def index():
                 elif not audience:
                     error = "Please select a target audience."
                 else:
-                    titles_prompt = f"Give minimum 5 YouTube titles for '{topic}' in a '{tone}' tone for '{audience}' audience."
-                    desc_prompt = f"Give minimum 3 short YouTube descriptions (minimum character limit: 250) for '{topic}' in '{tone}' tone."
+                    titles_prompt = f"should be give 5 YouTube titles for '{topic}' in a '{tone}' tone for '{audience}' audience."
+                    desc_prompt = f"should be Give 3 short YouTube descriptions (minimum character limit: 250) for '{topic}' in '{tone}' tone."
                     tags_prompt = (
                         f"Give minimum exactly 3 groups of 5-7 highly relevant, trendy hashtags for a YouTube video about '{topic}' in a '{tone}' tone. "
                         "Each group should be a single line, space-separated, with each hashtag starting with #. "
@@ -161,7 +161,7 @@ def index():
                         "#tag6 #tag7 #tag8 #tag9 #tag10\n"
                         "#tag11 #tag12 #tag13 #tag14 #tag15"
                     )
-                    thumb_prompt = f"Give minimum 3 thumbnail ideas for '{topic}' in '{tone}' tone."
+                    thumb_prompt = f"should be give minimum 3 thumbnail ideas for '{topic}' in '{tone}' tone."
 
                     titles = safe_ollama_prompt(titles_prompt)
                     descs = safe_ollama_prompt(desc_prompt)
