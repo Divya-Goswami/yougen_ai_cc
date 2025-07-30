@@ -1,17 +1,33 @@
-# YouGen AI - YouTube Content Generator
+# ✅ Render Deployment Fix for YouGen AI (Flask-based app)
+
+---
+
+## ✅ Step 1: Use Compatible Python Version
+Create a file in your root directory called:
+```
+runtime.txt
+```
+With the contents:
+```
+python-3.10.13
+```
+
+---
+
+## ✅ Step 2: Updated requirements.txt
+Replace your current `requirements.txt` with this:
+```txt
+--only-binary=:all:
+
+# TubeGenuis : AI Youtube Content Generator
 # Python Dependencies
 
 # Core Flask Framework
-flask==3.1.1
-werkzeug==3.1.0
+Flask==3.1.1
+Werkzeug==2.3.8
 
 # AI and Machine Learning
 ollama==0.1.7
-
---only-binary=:all:
-lxml==4.9.3
-flask
-gunicorn
 
 # Environment and Configuration
 python-dotenv==1.0.0
@@ -38,4 +54,37 @@ python-dateutil==2.8.2
 jsonschema==4.20.0
 
 # Logging
-colorlog==6.8.0 
+colorlog==6.8.0
+```
+
+---
+
+## ✅ Step 3: Add a Simple `render.yaml` (Optional)
+Create a file called `render.yaml` in the root:
+```yaml
+services:
+  - type: web
+    name: yougen-ai
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn main:app"
+    runtime: python
+    pythonVersion: 3.10
+```
+*Replace `app:app` with the actual filename of your Flask app, if not `app.py`.*
+
+---
+
+## ✅ Step 4: Push to GitHub and Connect to Render
+1. Push your updated code to GitHub
+2. Go to [https://render.com](https://render.com)
+3. Create a **New Web Service**
+4. Connect it to your repo
+5. Render will auto-detect and build your app
+
+---
+
+Let me know:
+- Your actual app filename (e.g., `main.py`, `yougen.py`, etc.)
+- If you're using Flask or Streamlit
+- If you want a free `demo.html` landing page to deploy as the front-end
