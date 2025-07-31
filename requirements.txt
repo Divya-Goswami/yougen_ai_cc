@@ -1,5 +1,3 @@
---only-binary=:all:
-
 # TubeGenuis : AI Youtube Content Generator
 # Python Dependencies
 
@@ -15,10 +13,6 @@ python-dotenv==1.0.0
 
 # Production Server
 gunicorn==21.2.0
-
-# Development and Testing
-pytest==7.4.3
-pytest-flask==1.3.0
 
 # Utilities
 requests==2.31.0
