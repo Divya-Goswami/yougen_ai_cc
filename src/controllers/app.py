@@ -64,6 +64,10 @@ def clean_and_group_output(output):
         if re.match(r'^thumbnail\s+\d+:', l):
             continue;
         
+        # Skip section headers
+        if l in ['titles:', 'descriptions:', 'hashtags:', 'thumbnail ideas:']:
+            continue
+        
         if any(h in l for h in ['title suggestion', 'title idea', 'titles:', 'title:', 'titles']):
             current = 'titles'
         elif any(h in l for h in ['description suggestion', 'description idea', 'descriptions:', 'description:', 'descriptions']):
@@ -77,7 +81,7 @@ def clean_and_group_output(output):
             clean = re.sub(r'^[-*•\d.\s]+', '', line)
         if current == 'description':
             clean = re.sub(r'^(\*\*|__)?description\s*\d+:(\*\*|__)?', '', clean, flags=re.IGNORECASE).strip()
-        if clean:
+        if clean and clean.lower() not in ['titles:', 'descriptions:', 'hashtags:', 'thumbnail ideas:']:
             sections[current].append(clean)
 
     def ensure_hashtags(groups):
