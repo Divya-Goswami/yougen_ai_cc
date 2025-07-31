@@ -136,7 +136,7 @@ def index():
             session['generation_count'] = 0
 
     if request.method == 'POST':
-        if app.config['DEMO_MODE'] and session.get('generation_count', 0) >= 2:
+        if app.config['DEMO_MODE'] and session.get('generation_count', 0) >= 5:
             error = "Demo limit reached. Please purchase the full version to unlock unlimited generations."
         else:
             try:
