@@ -298,6 +298,16 @@
         </div>
       </div>
       {% endif %}
+      {% if config and config.get('DEMO_MODE', False) %}
+      <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl flex items-center space-x-3">
+        <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"></path>
+        </svg>
+        <p class="text-yellow-700 font-medium">
+          <strong>Demo Notice:</strong> This live demo (<a href="https://yougen-ai-cc.onrender.com/" class="underline text-cyan-700" target="_blank">yougen-ai-cc.onrender.com</a>) is limited to <b>5 generations per user/session</b> for review purposes. The full version you receive after purchase has <b>no generation limit</b>.
+        </p>
+      </div>
+      {% endif %}
 
       <form id="generateForm" method="POST" class="space-y-8">
         <!-- Topic Input Section -->
