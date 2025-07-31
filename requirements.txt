@@ -1,9 +1,11 @@
-# YouGen AI - YouTube Content Generator
+--only-binary=:all:
+
+# TubeGenuis : AI Youtube Content Generator
 # Python Dependencies
 
 # Core Flask Framework
-flask==3.1.1
-werkzeug==3.1.0
+Flask==3.1.1
+Werkzeug==2.3.8
 
 # AI and Machine Learning
 ollama==0.1.7
