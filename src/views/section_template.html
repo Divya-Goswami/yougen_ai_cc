@@ -10,7 +10,7 @@
       <h2 class="text-lg font-bold text-gray-800 tracking-tight uppercase">Titles</h2>
     </div>
     <div class="space-y-2">
-      {% for item in current_content %}
+      {% for item in current_content[:5] %}
         {% set clean_item = item.replace('*', '').replace('-', '').strip() %}
         {% if clean_item and not clean_item.startswith('TITLES:') and 'hashtag' not in clean_item|lower %}
           <div class="bg-white p-3 rounded-xl border border-gray-200 flex items-center justify-between group hover:shadow transition">
@@ -34,7 +34,7 @@
       <h2 class="text-lg font-bold text-gray-800 tracking-tight uppercase">Description</h2>
     </div>
     <div class="space-y-2">
-      {% for item in current_content %}
+      {% for item in current_content[:5] %}
         {% set clean_item = item.replace('*', '').replace('-', '').replace('DESCRIPTION:', '').strip() %}
         {% if clean_item and clean_item|lower != 'descriptions:' and 'hashtag' not in clean_item|lower %}
           <div class="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-between group hover:shadow transition">
@@ -58,7 +58,7 @@
       <h2 class="text-lg font-bold text-gray-800 tracking-tight uppercase">Hashtags</h2>
     </div>
     <div class="flex flex-wrap gap-2">
-      {% for item in current_content %}
+      {% for item in current_content[:5] %}
         {% set clean_item = item.replace('*', '').replace('-', '').strip() %}
         {% if clean_item %}
           <div class="bg-white px-3 py-1 rounded-xl border border-gray-200 flex items-center group hover:shadow transition">
@@ -82,7 +82,7 @@
       <h2 class="text-lg font-bold text-gray-800 tracking-tight uppercase">Thumbnail Ideas</h2>
     </div>
     <div class="space-y-2">
-      {% for item in current_content %}
+      {% for item in current_content[:5] %}
         {% set clean_item = item.replace('*', '').replace('-', '').strip() %}
         {% set clean_item = clean_item | regex_replace('^Thumbnail idea \d+:', '') %}
         {% set clean_item = clean_item | regex_replace('^\[Idea \d+\]', '') %}
@@ -96,4 +96,4 @@
     </div>
   </div>
 
-{% endif %} 
+{% endif %}

@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify, Response, send_from_directory, session
-import ollama
+from openai import OpenAI
 import os
 import sys
 from dotenv import load_dotenv
@@ -13,28 +13,32 @@ from config import get_product_config
 # Load environment variables
 load_dotenv()
 
-# Get the base directory (project root)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Get OpenAI API key from environment variables
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set in the .env file")
 
-# Initialize Flask app with custom template and static folders
+# Initialize OpenAI client
+client = OpenAI(api_key=OPENAI_API_KEY)
+
+# Flask app init
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 app = Flask(
     __name__,
     template_folder=os.path.join(BASE_DIR, 'src', 'views'),
     static_folder=os.path.join(BASE_DIR, 'assets')
 )
 
-# Get product configuration
 PRODUCT_CONFIG = get_product_config()
 
-# Register a custom Jinja2 filter for regex_replace
 @app.template_filter('regex_replace')
 def regex_replace(s, find, replace):
     return re.sub(find, replace, s)
 
-# Production configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-in-production')
 app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 app.config['DEMO_MODE'] = os.environ.get('DEMO_MODE', 'False').lower() == 'true'
+
 
 def clean_and_group_output(output):
     print("DEBUG - Raw AI output:")
@@ -44,63 +48,55 @@ def clean_and_group_output(output):
     output = re.sub(r'\*\*([^\*]+)\*\*', r'\1', output)
     output = re.sub(r'\*([^\*]+)\*', r'\1', output)
     output = re.sub(r'^#+\s*', '', output, flags=re.MULTILINE)
-    output = re.sub(r'^-\s*', '', output, flags=re.MULTILINE)
-    output = re.sub(r'^\*\s*', '', output, flags=re.MULTILINE)
-    output = re.sub(r'^•\s*', '', output, flags=re.MULTILINE)
-    output = re.sub(r'^\d+\.\s*', '', output, flags=re.MULTILINE)
-    output = output.replace('##', '')
 
     sections = {'titles': [], 'description': [], 'hashtags': [], 'thumbnails': []}
     current = None
 
-    for line in output.split('\n'):
+    for line in output.splitlines():
         line = line.strip()
         if not line:
             continue
-            
-        l = line.lower()
-        
-        # Skip lines that start with "Thumbnail X:" pattern
-        if re.match(r'^thumbnail\s+\d+:', l):
-            continue;
-        
-        # Skip section headers
-        if l in ['titles:', 'descriptions:', 'hashtags:', 'thumbnail ideas:']:
-            continue
-        
-        if any(h in l for h in ['title suggestion', 'title idea', 'titles:', 'title:', 'titles']):
-            current = 'titles'
-        elif any(h in l for h in ['description suggestion', 'description idea', 'descriptions:', 'description:', 'descriptions']):
-            current = 'description'
-        elif any(h in l for h in ['hashtag', 'set', 'tags', 'hashtags']):
-            current = 'hashtags'
-        elif any(h in l for h in ['thumbnail', 'idea', 'thumbnails']):
-            current = 'thumbnails'
-        
-        if current:
-            clean = re.sub(r'^[-*•\d.\s]+', '', line)
-        if current == 'description':
-            clean = re.sub(r'^(\*\*|__)?description\s*\d+:(\*\*|__)?', '', clean, flags=re.IGNORECASE).strip()
-        if clean and clean.lower() not in ['titles:', 'descriptions:', 'hashtags:', 'thumbnail ideas:']:
-            sections[current].append(clean)
 
+        lower = line.lower()
+
+        # Header section markers
+        if 'title ideas:' in lower:
+            current = 'titles'
+            continue
+        elif 'description ideas:' in lower:
+            current = 'description'
+            continue
+        elif 'hashtag suggestions:' in lower:
+            current = 'hashtags'
+            continue
+        elif 'thumbnail ideas:' in lower:
+            current = 'thumbnails'
+            continue
+
+        if current:
+            cleaned = re.sub(r'^[-*•\d.\s]+', '', line)
+            if cleaned:
+                sections[current].append(cleaned)
+
+    # Hashtag formatting: group in sets
     def ensure_hashtags(groups):
         processed = []
         current_group = []
-        for group in groups:
-            line = group.replace('*', '').replace('-', '').strip()
-            if line.startswith('#'):
-                current_group.append(line)
-            elif current_group:
-                if len(current_group) >= 2:
-                    processed.append(' '.join(current_group))
-                current_group = []
-        if current_group and len(current_group) >= 2:
+        for line in groups:
+            tags = re.findall(r'#\w+', line)
+            if tags:
+                current_group.extend(tags)
+                if len(current_group) >= 5:
+                    processed.append(' '.join(current_group[:7]))
+                    current_group = current_group[7:]
+        if current_group:
             processed.append(' '.join(current_group))
         return processed
+
     if sections['hashtags']:
         sections['hashtags'] = ensure_hashtags(sections['hashtags'])
-    # Fallback: if no hashtags, insert default trendy groups
+
+    # Fallback hashtags
     if not sections['hashtags']:
         sections['hashtags'] = [
             '#YouTube #Viral #Trending #ContentCreator #Subscribe #Explore #Shorts',
@@ -114,19 +110,53 @@ def clean_and_group_output(output):
         if content:
             print(f"  Sample: {content[0]}")
 
+    print("DEBUG - Parsed sections:", sections)
+
+    # Ensure each section has exactly 5 items
+    for key in sections:
+        if key == 'hashtags':
+            # Ensure each hashtag group has 5-7 hashtags
+            sections[key] = sections[key][:5]  # Limit to 5 groups
+        else:
+            sections[key] = sections[key][:5]  # Limit to 5 items
+
+    # Fallback logic to ensure 5 items per section
+    fallback_data = {
+        'titles': [f"Fallback Title {i+1}" for i in range(5)],
+        'description': [f"Fallback Description {i+1}" for i in range(5)],
+        'hashtags': [
+            f"#Fallback{i+1} #Example{i+2} #Hashtag{i+3} #Sample{i+4} #Demo{i+5}"
+            for i in range(5)
+        ],
+        'thumbnails': [f"Fallback Thumbnail Idea {i+1}" for i in range(5)]
+    }
+
+    for key in sections:
+        while len(sections[key]) < 5:
+            sections[key].append(fallback_data[key][len(sections[key])])
+
+    print("DEBUG - Final Sections:", sections)
+
     return sections
 
-def safe_ollama_prompt(prompt):
-    for _ in range(2):
-        try:
-            response = ollama.chat(
-                model='gemma:2b',
-                messages=[{"role": "user", "content": prompt}]
-            )
-            return response.get('message', {}).get('content', '').strip()
-        except Exception:
-            time.sleep(1)
-    return ""
+def generate_content(prompt):
+    if not prompt:
+        raise ValueError("Prompt cannot be None or empty.")
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful YouTube assistant. Ensure all outputs are positive, non-offensive, and suitable for a general audience."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=700,
+            temperature=0.7
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        raise RuntimeError(f"Error generating content: {str(e)}")
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -134,7 +164,6 @@ def index():
     error = None
     sections = None
 
-    # Only apply limit if in demo mode
     if app.config['DEMO_MODE']:
         if 'generation_count' not in session:
             session['generation_count'] = 0
@@ -155,48 +184,33 @@ def index():
                 elif not audience:
                     error = "Please select a target audience."
                 else:
-                    titles_prompt = f"Give 5 catchy YouTube video titles for the topic '{topic}' in a '{tone}' tone for a '{audience}' audience."
-                    desc_prompt = f"Write 3 short YouTube video descriptions (at least 250 characters each) for '{topic}' in a '{tone}' tone."
-                    tags_prompt = (
-                        f"Give exactly 3 groups of 5-7 highly relevant, trendy hashtags for a YouTube video about '{topic}' in a '{tone}' tone. "
-                        "Each group should be a single line, space-separated, with each hashtag starting with #. "
-                        "Do not include any explanations, group labels, or bullets. Only output the hashtags, like this:\n"
-                        "#tag1 #tag2 #tag3 #tag4 #tag5\n"
-                        "#tag6 #tag7 #tag8 #tag9 #tag10\n"
-                        "#tag11 #tag12 #tag13 #tag14 #tag15"
+                    # Construct a detailed prompt for OpenAI
+                    detailed_prompt = (
+                        f"Generate AI-powered 5 titles, 5 descriptions, 5 set of hashtags (5-7 hashtag in each suggestions), 5 thumnail ideas for youtube posts.\n"
+                        f"Topic: {topic}\n"
+                        f"Tone: {tone}\n"
+                        f"Audience: {audience}\n"
+                        "Ensure the output is clear, non-offensive, and suitable for a general audience."
                     )
-                    thumb_prompt = f"Suggest 3 creative thumbnail ideas for a YouTube video about '{topic}' in a '{tone}' tone."
 
-                    titles = safe_ollama_prompt(titles_prompt)
-                    descs = safe_ollama_prompt(desc_prompt)
-                    tags = safe_ollama_prompt(tags_prompt)
-                    thumbs = safe_ollama_prompt(thumb_prompt)
+                    # Use the detailed prompt for content generation
+                    if app.config['DEMO_MODE']:
+                        raw_output = generate_content(detailed_prompt)
+                    else:
+                        raw_output = generate_content(detailed_prompt)
 
-                    raw_output = f"""
-TITLES:
-{titles}
+                    print("DEBUG - Raw OpenAI output:", raw_output)
 
-DESCRIPTIONS:
-{descs}
-
-HASHTAGS:
-{tags}
-
-THUMBNAIL IDEAS:
-{thumbs}
-"""
-                    print("DEBUG - Ollama raw response:", raw_output)
                     output = raw_output
                     sections = clean_and_group_output(output)
-                    # Increment generation count only in demo mode
+
                     if app.config['DEMO_MODE']:
                         session['generation_count'] += 1
             except Exception as e:
                 error = f"Error generating content: {str(e)}"
                 app.logger.error(f"Content generation error: {e}")
 
-    return render_template('index.html', output=output, error=error, sections=sections, config=PRODUCT_CONFIG)
-
+    return render_template('index.html', output=output, error=error, sections=sections, config=PRODUCT_CONFIG, welcome_message="Thank you for purchasing this project from CodeCanyon! Please ensure your inputs are positive and non-offensive.")
 @app.route('/health')
 def health_check():
     return jsonify({"status": "healthy", "service": "YouGen: AI YouTube Content Generator"})
