@@ -103,7 +103,7 @@ def generate_content(prompt):
                 {"role": "system", "content": "You are a helpful YouTube assistant. Ensure all outputs are positive, non-offensive, and suitable for a general audience."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=400,
+            max_tokens=700,
             temperature=0.7
         )
         return response.choices[0].message.content.strip()
