@@ -40,19 +40,21 @@ app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 app.config['DEMO_MODE'] = os.environ.get('DEMO_MODE', 'False').lower() == 'true'
 
 
-def clean_and_group_output(output):
+def clean_and_group_output(output, topic, tone, audience):
     print("DEBUG - Raw AI output:")
     print(output)
     print("=" * 50)
 
-    output = re.sub(r'\*\*([^\*]+)\*\*', r'\1', output)
-    output = re.sub(r'\*([^\*]+)\*', r'\1', output)
-    output = re.sub(r'^#+\s*', '', output, flags=re.MULTILINE)
+    # Normalize section headers to ensure consistency
+    normalized_output = re.sub(r'(?i)engaging titles|titles:', 'Titles:', output)
+    normalized_output = re.sub(r'(?i)detailed descriptions|descriptions:', 'Descriptions:', normalized_output)
+    normalized_output = re.sub(r'(?i)trendy hashtags|hashtags:', 'Hashtags:', normalized_output)
+    normalized_output = re.sub(r'(?i)creative thumbnail ideas|thumbnails:', 'Thumbnails:', normalized_output)
 
     sections = {'titles': [], 'description': [], 'hashtags': [], 'thumbnails': []}
     current = None
 
-    for line in output.splitlines():
+    for line in normalized_output.splitlines():
         line = line.strip()
         if not line:
             continue
@@ -60,82 +62,33 @@ def clean_and_group_output(output):
         lower = line.lower()
 
         # Header section markers
-        if 'title ideas:' in lower:
+        if 'titles:' in lower:
             current = 'titles'
             continue
-        elif 'description ideas:' in lower:
+        elif 'descriptions:' in lower:
             current = 'description'
             continue
-        elif 'hashtag suggestions:' in lower:
+        elif 'hashtags:' in lower:
             current = 'hashtags'
             continue
-        elif 'thumbnail ideas:' in lower:
+        elif 'thumbnails:' in lower:
             current = 'thumbnails'
             continue
 
         if current:
-            cleaned = re.sub(r'^[-*•\d.\s]+', '', line)
+            # Remove numbering, bullet points, and quotes
+            cleaned = re.sub(r'^[a-zA-Z0-9]+[).:-]?\s*', '', line)  # Remove character-based numbering and bullet points
+            cleaned = re.sub(r'^"|"$', '', cleaned)  # Remove surrounding quotes
+            cleaned = re.sub(r'^“|”$', '', cleaned)  # Remove fancy quotes
+            cleaned = cleaned.strip()  # Ensure no leading/trailing spaces
             if cleaned:
                 sections[current].append(cleaned)
 
-    # Hashtag formatting: group in sets
-    def ensure_hashtags(groups):
-        processed = []
-        current_group = []
-        for line in groups:
-            tags = re.findall(r'#\w+', line)
-            if tags:
-                current_group.extend(tags)
-                if len(current_group) >= 5:
-                    processed.append(' '.join(current_group[:7]))
-                    current_group = current_group[7:]
-        if current_group:
-            processed.append(' '.join(current_group))
-        return processed
-
-    if sections['hashtags']:
-        sections['hashtags'] = ensure_hashtags(sections['hashtags'])
-
-    # Fallback hashtags
-    if not sections['hashtags']:
-        sections['hashtags'] = [
-            '#YouTube #Viral #Trending #ContentCreator #Subscribe #Explore #Shorts',
-            '#Vlog #InstaGood #Like #Share #NewVideo #MustWatch #ViralVideo',
-            '#YouTuber #Creator #VideoOfTheDay #FYP #WatchNow #Popular #Discover'
-        ]
-
-    print("DEBUG - Sections found:")
-    for section_name, content in sections.items():
-        print(f"{section_name}: {len(content)} items")
-        if content:
-            print(f"  Sample: {content[0]}")
-
-    print("DEBUG - Parsed sections:", sections)
-
     # Ensure each section has exactly 5 items
     for key in sections:
-        if key == 'hashtags':
-            # Ensure each hashtag group has 5-7 hashtags
-            sections[key] = sections[key][:5]  # Limit to 5 groups
-        else:
-            sections[key] = sections[key][:5]  # Limit to 5 items
+        sections[key] = sections[key][:5]  # Limit to 5 items
 
-    # Fallback logic to ensure 5 items per section
-    fallback_data = {
-        'titles': [f"Fallback Title {i+1}" for i in range(5)],
-        'description': [f"Fallback Description {i+1}" for i in range(5)],
-        'hashtags': [
-            f"#Fallback{i+1} #Example{i+2} #Hashtag{i+3} #Sample{i+4} #Demo{i+5}"
-            for i in range(5)
-        ],
-        'thumbnails': [f"Fallback Thumbnail Idea {i+1}" for i in range(5)]
-    }
-
-    for key in sections:
-        while len(sections[key]) < 5:
-            sections[key].append(fallback_data[key][len(sections[key])])
-
-    print("DEBUG - Final Sections:", sections)
+    print("DEBUG - Filtered Sections:", sections)
 
     return sections
 
@@ -145,12 +98,12 @@ def generate_content(prompt):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o",  # Use the latest model for better quality
             messages=[
                 {"role": "system", "content": "You are a helpful YouTube assistant. Ensure all outputs are positive, non-offensive, and suitable for a general audience."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=700,
+            max_tokens=400,
             temperature=0.7
         )
         return response.choices[0].message.content.strip()
@@ -186,7 +139,11 @@ def index():
                 else:
                     # Construct a detailed prompt for OpenAI
                     detailed_prompt = (
-                        f"Generate AI-powered 5 titles, 5 descriptions, 5 set of hashtags (5-7 hashtag in each suggestions), 5 thumnail ideas for youtube posts.\n"
+                        f"You are a YouTube expert. Generate AI-powered suggestions for the following:\n"
+                        f"1. 5 engaging titles for YouTube videos.\n"
+                        f"2. 5 detailed descriptions tailored for the topic, tone, and audience. max 100 characters\n"
+                        f"3. 5 sets of trendy hashtags (5-7 hashtags per set).\n"
+                        f"4. 5 creative thumbnail ideas.\n"
                         f"Topic: {topic}\n"
                         f"Tone: {tone}\n"
                         f"Audience: {audience}\n"
@@ -202,7 +159,9 @@ def index():
                     print("DEBUG - Raw OpenAI output:", raw_output)
 
                     output = raw_output
-                    sections = clean_and_group_output(output)
+                    sections = clean_and_group_output(output, topic, tone, audience)
+
+                    print("DEBUG - Sections passed to template:", sections)
 
                     if app.config['DEMO_MODE']:
                         session['generation_count'] += 1
@@ -468,9 +427,7 @@ def blog():
         <p>Are you a YouTuber looking to grow faster, rank higher, and publish smarter in 2025? AI is transforming how content creators operate—from writing scripts to designing thumbnails and crafting perfect titles. In this post, we'll share the <strong>top 10 AI tools for YouTubers in 2025</strong>—including the breakthrough tool everyone's talking about: <span class="highlight">YouGen AI</span>.</p>
         <ol>
           <li><span class="tool-title">YouGen AI – AI YouTube Content Generator</span><br>
-            <span style="color:#333;">Best for:</span> Title, Description, Hashtag, and Thumbnail idea generation.<br>
-            YouGen AI is an all-in-one AI-powered content generator that helps creators craft high-converting YouTube content in seconds. Just enter your topic, tone, and audience—and boom! Get 3–5 title options, SEO-optimized descriptions, hashtags, and thumbnail suggestions.<br>
-            <span style="color:#333;">Perfect for:</span> YouTubers, marketers, freelancers<br>
+            <span style="color:#
             Website: <a href="https://tubegenuis.online" target="_blank" rel="noopener">https://tubegenuis.online</a>
           </li>
           <li><span class="tool-title">Descript</span><br>
