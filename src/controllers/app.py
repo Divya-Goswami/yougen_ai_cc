@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify, Response, send_from_directory, session
-from openai import OpenAI
+import openai
 import os
 import sys
 from dotenv import load_dotenv
@@ -19,7 +19,7 @@ if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY is not set in the .env file")
 
 # Initialize OpenAI client
-client = OpenAI(api_key=OPENAI_API_KEY)
+openai.api_key = OPENAI_API_KEY
 
 # Flask app init
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
