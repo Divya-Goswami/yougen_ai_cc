@@ -145,7 +145,7 @@ def generate_content(prompt):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a helpful YouTube assistant. Ensure all outputs are positive, non-offensive, and suitable for a general audience."},
                 {"role": "user", "content": prompt}
