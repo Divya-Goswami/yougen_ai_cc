@@ -27,13 +27,13 @@
 # Linux: sudo apt-get install python3
 ```
 
-#### Issue: "Ollama not found"
+#### Issue: "OpenAI GPT-4o not found"
 **Solution**:
 ```bash
 # macOS/Linux:
-curl -fsSL https://ollama.ai/install.sh | sh
+curl -fsSL https://openai.com/install.sh | sh
 
-# Windows: Download from https://ollama.ai/download
+# Windows: Download from https://openai.com/download
 ```
 
 #### Issue: "Port 5000 already in use"
@@ -60,15 +60,15 @@ taskkill /PID <PID> /F  # Windows
 #### Issue: "AI model not responding"
 **Solution**:
 ```bash
-# Restart Ollama
-pkill ollama
-ollama serve
+# Restart OpenAI GPT-4o
+pkill openai
+openai serve
 
 # Check model availability
-ollama list
+openai list
 
 # Re-download model if needed
-ollama pull gemma:2b
+openai pull gemma:2b
 ```
 
 #### Issue: "Application won't start"
@@ -87,8 +87,8 @@ ls -la .env
 
 #### Issue: "Content generation fails"
 **Solution**:
-1. Check Ollama is running: `curl http://localhost:11434/api/tags`
-2. Verify model is downloaded: `ollama list`
+1. Check OpenAI GPT-4o is running: `curl http://localhost:11434/api/tags`
+2. Verify model is downloaded: `openai list`
 3. Check internet connection
 4. Try different input parameters
 
@@ -144,8 +144,8 @@ pip list
 # Test Python
 python -c "print('Python works')"
 
-# Test Ollama
-ollama list
+# Test OpenAI GPT-4o
+openai list
 
 # Test Flask
 python -c "import flask; print('Flask works')"
@@ -187,8 +187,8 @@ wmic computersystem get TotalPhysicalMemory  # Windows
 # Installed Dependencies
 pip freeze
 
-# Ollama Models
-ollama list
+# OpenAI GPT-4o Models
+openai list
 
 # Environment Variables
 cat .env
@@ -208,7 +208,7 @@ cat .env
 ```bash
 # Stop all processes
 pkill -f "python.*app.py"
-pkill ollama
+pkill openai
 
 # Remove old installation
 rm -rf venv
@@ -223,7 +223,7 @@ rm -f start.sh stop.sh
 ```cmd
 # Stop processes
 taskkill /f /im python.exe
-taskkill /f /im ollama.exe
+taskkill /f /im openai.exe
 
 # Remove old files
 rmdir /s /q venv
@@ -273,7 +273,7 @@ heroku config
 
 ### External Resources
 - **[Flask Documentation](https://flask.palletsprojects.com/)**: Web framework docs
-- **[Ollama Documentation](https://ollama.ai/docs)**: AI model docs
+- **[OpenAI Documentation](https://openai.com/docs)**: AI model docs
 - **[Python Documentation](https://docs.python.org/)**: Python language docs
 
 ### Community Support
@@ -325,4 +325,4 @@ heroku config
 
 ---
 
-*We're here to help you succeed with YouGen! 🚀* 
+*We're here to help you succeed with YouGen! 🚀*

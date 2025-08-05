@@ -20,7 +20,7 @@ YouGen AI is a professional-grade AI application that instantly generates viral 
 - **Audience Targeting**: Tailor content for specific demographics
 
 ### 🎯 Advanced Features
-- **Real-time AI Processing**: Instant content generation using Ollama AI
+- **Real-time AI Processing**: Instant content generation using OpenAI GPT-4o
 - **Responsive Web Interface**: Beautiful, mobile-friendly design
 - **Production Ready**: Built for scalability and reliability
 - **Easy Deployment**: One-click deployment to major platforms
@@ -35,19 +35,83 @@ YouGen AI is a professional-grade AI application that instantly generates viral 
 - **Internet**: Required for AI model access
 
 ### Software Dependencies
-- **Ollama**: Local AI model server
+- **OpenAI GPT-4o**: Local AI model server
 - **Flask**: Web framework
 - **Gunicorn**: Production WSGI server
 - **Python-dotenv**: Environment management
 
 ## 🛠️ Installation Guide
 
-_KEY=$(python -c "import secrets; print(secrets.token_hex(32))")
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/yourusername/ai-youtube-content-generator.git
+cd ai-youtube-content-generator
+```
+
+### Step 2: Set Up Python Environment
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+
+### Step 3: Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Install OpenAI GPT-4o
+```bash
+# On macOS/Linux:
+curl -fsSL https://openai.com/install.sh | sh
+
+# On Windows:
+# Download from https://openai.com/download
+```
+
+### Step 5: Configure Environment
+```bash
+# Create .env file
+cat > .env << EOF
+SECRET_KEY=your-secret-key-change-in-production
+FLASK_DEBUG=True
+PORT=5000
+EOF
+```
+
+### Step 6: Run the Application
+```bash
+python app.py
+```
+
+The application will be available at `http://localhost:5000`
+
+## 🚀 Quick Deployment
+
+### Option 1: Automated Deployment Script
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### Option 2: Manual Deployment
+
+#### Deploy to Heroku
+```bash
+# Install Heroku CLI
+# Create app
+heroku create your-app-name
+
+# Set environment variables
+heroku config:set SECRET_KEY=your-secret-key-change-in-production
 heroku config:set FLASK_DEBUG=False
 
 # Deploy
-git add .
-git commit -m "Deploy to Heroku"
 git push heroku main
 ```
 
@@ -86,7 +150,7 @@ Open your web browser and navigate to the deployed URL or `http://localhost:5000
 
 ### Technology Stack
 - **Backend**: Flask (Python web framework)
-- **AI Engine**: Ollama with Gemma 2B model
+- **AI Engine**: OpenAI GPT-4o model
 - **Frontend**: HTML5, Tailwind CSS, JavaScript
 - **Deployment**: Gunicorn WSGI server
 - **Environment**: Python virtual environment
@@ -112,90 +176,15 @@ ai-youtube-content-generator/
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | `SECRET_KEY` | Flask secret key | `your-secret-key-change-in-production` | Yes |
-| `FLASK_DEBUG` | Debug mod### Step 1: Clone the Repository
-```bash
-git clone https://github.com/yourusername/ai-youtube-content-generator.git
-cd ai-youtube-content-generator
-```
-
-### Step 2: Set Up Python Environment
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Install Ollama
-```bash
-# On macOS/Linux:
-curl -fsSL https://ollama.ai/install.sh | sh
-
-# On Windows:
-# Download from https://ollama.ai/download
-```
-
-### Step 5: Download AI Model
-```bash
-# Start Ollama service
-ollama serve
-
-# In a new terminal, pull the model
-ollama pull gemma:2b
-```
-
-### Step 6: Configure Environment
-```bash
-# Create .env file
-cat > .env << EOF
-SECRET_KEY=your-secret-key-change-in-production
-FLASK_DEBUG=True
-PORT=5000
-EOF
-```
-
-### Step 7: Run the Application
-```bash
-python app.py
-```
-
-The application will be available at `http://localhost:5000`
-
-## 🚀 Quick Deployment
-
-### Option 1: Automated Deployment Script
-```bash
-chmod +x deploy.sh
-./deploy.sh
-```
-
-### Option 2: Manual Deployment
-
-#### Deploy to Heroku
-```bash
-# Install Heroku CLI
-# Create app
-heroku create your-app-name
-
-# Set environment variables
-heroku config:set SECRETe | `False` | No |
+| `FLASK_DEBUG` | Debug mode | `True` | No |
 | `PORT` | Server port | `5000` | No |
 
 ### AI Model Configuration
-The application uses the Gemma 2B model through Ollama. You can switch to other models by modifying the `model` parameter in `app.py`:
+The application uses the OpenAI GPT-4o. You can switch to other models by modifying the `model` parameter in `app.py`:
 
 ```python
-response = ollama.chat(
-    model='gemma:2b',  # Change this to use different models
+response = openai.ChatCompletion.create(
+    model='gpt-4o',  # Change this to use different models
     messages=[{"role": "user", "content": prompt}]
 )
 ```
@@ -231,13 +220,13 @@ curl http://localhost:5000/health
 
 ### Common Issues
 
-#### Ollama Not Running
+#### OpenAI GPT-4o Not Running
 ```bash
-# Start Ollama service
-ollama serve
+# Start OpenAI GPT-4o service
+openai serve
 
 # Check if model is available
-ollama list
+openai list
 ```
 
 #### Port Already in Use
@@ -301,7 +290,7 @@ This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.t
 
 ### Documentation
 - [Flask Documentation](https://flask.palletsprojects.com/)
-- [Ollama Documentation](https://ollama.ai/docs)
+- [OpenAI GPT-4o Documentation](https://openai.com/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
 ### Community

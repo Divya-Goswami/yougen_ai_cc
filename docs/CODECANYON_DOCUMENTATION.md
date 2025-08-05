@@ -15,7 +15,7 @@
 
 ## Introduction
 
-YouGen AI is a professional-grade AI application that generates viral YouTube titles, descriptions, hashtags, and thumbnail ideas. This application is built with Flask and uses Ollama AI for content generation.
+YouGen AI is a professional-grade AI application that generates viral YouTube titles, descriptions, hashtags, and thumbnail ideas. This application is built with Flask and uses OpenAI GPT-4o for content generation.
 
 ### What You Get
 - Complete Flask web application
@@ -73,12 +73,12 @@ source venv/bin/activate
 pip install -r config/requirements.txt
 ```
 
-### Step 3: Install Ollama
-1. Visit [ollama.ai](https://ollama.ai)
-2. Download and install Ollama for your platform
+### Step 3: Install OpenAI GPT-4o
+1. Visit [openai.com](https://openai.com)
+2. Download and install OpenAI GPT-4o for your platform
 3. Open terminal and run:
 ```bash
-ollama pull gemma2:2b
+openai pull gpt-4o
 ```
 
 ### Step 4: Configure Environment
@@ -87,14 +87,14 @@ ollama pull gemma2:2b
 ```env
 SECRET_KEY=your-secret-key-here
 FLASK_DEBUG=False
-OLLAMA_HOST=http://localhost:11434
-OLLAMA_MODEL=gemma2:2b
+OPENAI_HOST=http://localhost:11434
+OPENAI_MODEL=gpt-4o
 ```
 
 ### Step 5: Start the Application
 ```bash
-# Start Ollama (in a separate terminal)
-ollama serve
+# Start OpenAI (in a separate terminal)
+openai serve
 
 # Start the application
 python main.py
@@ -114,8 +114,8 @@ Edit the `.env` file to customize your application:
 |----------|-------------|---------|
 | `SECRET_KEY` | Flask secret key | Auto-generated |
 | `FLASK_DEBUG` | Debug mode | False |
-| `OLLAMA_HOST` | Ollama server URL | http://localhost:11434 |
-| `OLLAMA_MODEL` | AI model name | gemma2:2b |
+| `OPENAI_HOST` | OpenAI server URL | http://localhost:11434 |
+| `OPENAI_MODEL` | AI model name | gpt-4o |
 
 ### Application Settings
 Edit `config/config.py` to modify:
@@ -249,11 +249,11 @@ Edit `src/views/index.html` and add to the tone select:
 
 ### Common Issues
 
-#### 1. "Cannot connect to Ollama"
+#### 1. "Cannot connect to OpenAI"
 **Solution**:
-- Ensure Ollama is running: `ollama serve`
-- Check if model is downloaded: `ollama list`
-- Verify OLLAMA_HOST in `.env` file
+- Ensure OpenAI is running: `openai serve`
+- Check if model is downloaded: `openai list`
+- Verify OPENAI_HOST in `.env` file
 
 #### 2. "Module not found" errors
 **Solution**:
@@ -282,12 +282,12 @@ taskkill /PID <PID> /F
 ### Performance Issues
 - **Slow generation**: Ensure sufficient RAM (4GB+ recommended)
 - **High CPU usage**: Close other applications
-- **Memory errors**: Restart Ollama server
+- **Memory errors**: Restart OpenAI server
 
 ### AI Model Issues
 - **Poor quality results**: Try different models
 - **Timeout errors**: Increase timeout in configuration
-- **Model not found**: Download model: `ollama pull gemma2:2b`
+- **Model not found**: Download model: `openai pull gpt-4o`
 
 ---
 
@@ -326,8 +326,8 @@ heroku config:set FLASK_DEBUG=False
 SECRET_KEY=your-production-secret-key
 FLASK_DEBUG=False
 FLASK_ENV=production
-OLLAMA_HOST=http://localhost:11434
-OLLAMA_MODEL=gemma2:2b
+OPENAI_HOST=http://localhost:11434
+OPENAI_MODEL=gpt-4o
 ```
 
 ---
@@ -367,7 +367,7 @@ yougen_ai_converter-main/
 This item is licensed under the MIT License. See `docs/LICENSE.txt` for details.
 
 ### Third-Party Assets
-- **Ollama**: AI model infrastructure
+- **OpenAI**: AI model infrastructure
 - **Flask**: Web framework
 - **Tailwind CSS**: UI components
 - **Font Awesome**: Icons
@@ -379,4 +379,4 @@ If you use this item, please include attribution to the original author in your 
 
 **Thank you for purchasing YouGen AI!**
 
-For additional support, please refer to the documentation files or contact our support team. 
+For additional support, please refer to the documentation files or contact our support team.

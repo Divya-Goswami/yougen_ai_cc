@@ -46,8 +46,8 @@ python app.py
 1. Install Python from https://python.org
 2. Open Command Prompt in the project folder
 3. Run: `pip install -r requirements.txt`
-4. Download Ollama from https://ollama.ai/download
-5. Run: `ollama pull gemma:2b`
+4. Install OpenAI GPT-4o from https://openai.com/download
+5. Run: `openai pull gpt-4o`
 6. Run: `python app.py`
 
 #### macOS/Linux Users:
@@ -55,11 +55,11 @@ python app.py
 # Install Python dependencies
 pip3 install -r requirements.txt
 
-# Install Ollama
-curl -fsSL https://ollama.ai/install.sh | sh
+# Install OpenAI GPT-4o
+curl -fsSL https://openai.com/install.sh | sh
 
 # Download AI model
-ollama pull gemma:2b
+openai pull gpt-4o
 
 # Start the application
 python3 app.py
@@ -116,7 +116,7 @@ Your YouGen AI is now running! Create viral content for your YouTube channel in 
      ```
 
 2. **Manual Installation Steps:**
-   - After installing Python and Ollama, follow these steps:
+   - After installing Python and OpenAI GPT-4o, follow these steps:
      - Create and activate a virtual environment:
        - Windows:
          ```
@@ -134,7 +134,7 @@ Your YouGen AI is now running! Create viral content for your YouTube channel in 
        ```
      - Download the AI model:
        ```
-       ollama pull gemma:2b
+       openai pull gpt-4o
        ```
      - Create a `.env` file (if not present):
        ```
@@ -150,4 +150,3 @@ Your YouGen AI is now running! Create viral content for your YouTube channel in 
 
 3. **For more details, see the INSTALLATION.md and README.md files included in your download.**  
    If you have any issues, check SUPPORT.md or contact support@yougenai.com.
- 
